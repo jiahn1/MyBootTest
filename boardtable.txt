@@ -1,0 +1,11 @@
+desc board;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| number   | int(11)         | NO   | PRI | NULL    | auto_increment |
+| writer  	 | varchar(32)  | NO   |     | NULL    |                |
+| subject 	 | varchar(200) | NO   |     | NULL    |                |
+| contents | text         | YES  |     | NULL    |                |
+| created  | datetime     | NO   |     | NULL    |                |
+| password | varchar(50)  | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
