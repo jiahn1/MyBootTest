@@ -2,13 +2,19 @@ package com.first.demo.domain;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 public class Board {
 	
 	private int number;
     private String writer;
     private String subject;
     private String contents;
-	private Date datetime;
+	private Date created;
     private String password;
     
 	public int getNumber() {
@@ -35,11 +41,11 @@ public class Board {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getDatetime() {
-		return datetime;
+	public Date getCreated() {
+		return created;
 	}
-	public void setDatetime(Date datetime) {
-		this.datetime = datetime;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 	public String getPassword() {
 		return password;
@@ -47,5 +53,17 @@ public class Board {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
+	public Board(int number, String writer, String subject, String contents, Date created, String password) {
+        super();
+        this.number = number;
+        this.writer = writer;
+        this.subject = subject;
+        this.contents = contents;
+        this.created = created;
+        this.password = password;
+        
+    }
+    
 }
