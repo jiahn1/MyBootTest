@@ -1,7 +1,5 @@
 package com.first.demo.domain;
 
-import java.util.Date;
-
 public class Board_Detail {
 	
 	private int number;

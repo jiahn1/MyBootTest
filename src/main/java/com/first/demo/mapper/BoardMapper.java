@@ -9,7 +9,7 @@ import com.first.demo.domain.*;
 @Mapper
 public interface BoardMapper {
 	
-	 public List<Board> getBoard();
+	 public List<Board> getBoard(int list_count_int);
 	 
 	 public List<Board_Detail> getBoard_Detail(Board_Detail_Value detail);
 	 

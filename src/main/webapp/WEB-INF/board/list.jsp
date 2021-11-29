@@ -27,7 +27,7 @@
 				<tbody>
 					<c:forEach items="${list}" var="board" varStatus="status">
 						<tr>
-							<td>${status.count}</td>
+							<td>${board.LEVEL_COUNT}</td>
 							<td><a href ="/list_detail?number=${board.number}">${board.subject}</a></td>
 							<td>${board.writer}</td>
 							<td>${board.created}</td>
@@ -43,7 +43,7 @@
 				<ul class = "pagination justify-content-center">
 					<c:forEach items="${list_Count}" var="Count">				
 						<c:forEach var="board_count_level" begin ="1" end="${Count.board_count}" varStatus="status">
-							<li class="page-item "><a class="page-link" href ="#"><c:out value="${status.count}"/></a></li>
+							<li class="page-item "><a class="page-link" href ="/list?list_count=${status.count}"><c:out value="${status.count}"/></a></li>
 						</c:forEach>
 					</c:forEach>
 				</ul>

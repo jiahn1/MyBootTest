@@ -1,16 +1,21 @@
 package com.first.demo.domain;
 
-import java.util.Date;
-
 public class Board {
 	
+	private int LEVEL_COUNT;
 	private int number;
     private String writer;
-    private String subject;
+	private String subject;
     private String contents;
 	private String created;
     private String password;
     
+    public int getLEVEL_COUNT() {
+		return LEVEL_COUNT;
+	}
+	public void setLEVEL_COUNT(int lEVEL_COUNT) {
+		LEVEL_COUNT = lEVEL_COUNT;
+	}
 	public int getNumber() {
 		return number;
 	}

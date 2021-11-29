@@ -14,9 +14,9 @@ public class BoardService {
 	@Autowired
 	private BoardMapper m;
 	
-	public List<Board> getBoard(){
+	public List<Board> getBoard(int list_count_int){
 		
-		return m.getBoard();
+		return m.getBoard(list_count_int);
 		
 	}
 	

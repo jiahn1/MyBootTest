@@ -4,14 +4,24 @@
         
 <mapper namespace="com.first.demo.mapper.BoardMapper">
 
-    <select id="getBoard" resultType="com.first.demo.domain.Board">
-        SELECT number
-    		,  writer 
-    		, subject 
-    		, contents 
-    		, date_format(created, '%Y-%m-%d %h:%m') AS created
-    		, password
-		FROM board
+    <select id="getBoard" parameterType="int" resultType="com.first.demo.domain.Board">
+		SELECT LEVEL_COUNT
+			, number
+			, writer
+			, subject
+			, contents
+			, created
+			, password
+	   FROM (SELECT a.number
+				  , a.writer 
+	    		  , a.subject 
+	    		  , a.contents 
+	    		  , date_format(a.created, '%Y-%m-%d %h:%m') AS created
+	    		  , a.password
+	              , ( @rank := @rank + 1) AS LEVEL_COUNT
+			   FROM board a, ( SELECT @rank := 0 ) AS b
+			  order by a.number) M
+	          WHERE LEVEL_COUNT BETWEEN (#{list_count_int}-1)*10+1 AND #{list_count_int}*10
     </select>
     
     <select id="getBoard_Detail" parameterType="com.first.demo.domain.Board_Detail_Value" resultType="com.first.demo.domain.Board_Detail">

@@ -24,9 +24,21 @@ public class BoardController {
     private BoardService s;
 	
     @RequestMapping(value="/list", method=RequestMethod.GET)
-    public String boardList(Model model){
+    public String boardList(HttpServletRequest request, Model model) throws UnsupportedEncodingException{
+    	request.setCharacterEncoding("UTF-8");
+    	
+    	String list_count = request.getParameter("list_count");
+    	
+    	int list_count_int = 0;
+    	
+    	if (list_count != null) {
+    		list_count_int = Integer.parseInt(list_count);
+    	} else {
+    		list_count_int = 1;
+    	}
+    	
     	model.addAttribute("list_Count",s.getBoard_Count());
-        model.addAttribute("list",s.getBoard());     
+        model.addAttribute("list",s.getBoard(list_count_int));     
     	return "list";
         
     }
