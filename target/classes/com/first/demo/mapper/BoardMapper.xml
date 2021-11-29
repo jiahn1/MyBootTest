@@ -37,7 +37,7 @@
     
 	<select id="getBoard_Count" resultType="com.first.demo.domain.Board_Count">
 		<![CDATA[
-			SELECT IF(count(number)/10 < 1, 1, count(number)/10+1) as board_count
+			SELECT IF(count(number)/10 <= 1, 1, count(number)/10+1) as board_count
 			FROM board
 		]]>
 	</select>
