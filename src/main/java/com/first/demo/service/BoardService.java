@@ -19,5 +19,11 @@ public class BoardService {
 		return m.getBoard();
 		
 	}
+	
+	public Board getDetail(int number){
+		
+		return m.getDetail(number);
+		
+	}
 
 }

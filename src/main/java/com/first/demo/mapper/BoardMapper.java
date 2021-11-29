@@ -10,4 +10,5 @@ import com.first.demo.domain.Board;
 public interface BoardMapper {
 	
 	 public List<Board> getBoard();
+	 public Board getDetail(int number);
 }
