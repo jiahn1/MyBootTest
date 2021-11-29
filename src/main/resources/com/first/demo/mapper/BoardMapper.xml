@@ -1,16 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        
-<mapper namespace="com.first.demo.mapper.BoardMapper">
 
-    <select id="getBoard" resultType="com.first.demo.domain.Board">
-        SELECT
-        *
-        FROM
-        board
-    </select>
-    
-    
-    
+<mapper namespace="com.first.demo.mapper.BoardMapper">
+	
+	<!-- 게시판 개수 -->
+	<select id="boardCount" resultType="com.first.demo.domain.Board">
+		SELECT
+		COUNT()*
+		FROM
+		board
+	</select>
+
+	<!-- 목록 -->
+	<select id="boardList" resultType="com.first.demo.domain.Board">
+		SELECT * FROM BOARD
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="boardDetail" parameterType="int"
+		resultType="com.first.demo.domain.Board">
+		SELECT
+		*
+		FROM BOARD
+		WHERE
+		NUMBER = #{number}
+	</select>
+
+
+	<!-- 삽입 -->
+	<insert id="boardInsert"
+		parameterType="com.first.demo.domain.Board">
+		INSERT INTO
+		BOARD (NUMBER, SUBJECT,CONTENT,WRITER,CREATED)
+		VALUES(#{number},#{subject},#{contents},#{writer},now())
+	</insert>
+
+
+	<!-- 업데이트 -->
+	<update id="boardUpdate"
+		parameterType="com.first.demo.domain.Board">
+		UPDATE BOARD
+		SET
+		<if test="subject != null">  <!-- 혹시나 -->
+			SUBJECT = #{subject}
+		</if>
+		<if test="subject != null and contents != null"> , </if>
+		<if test="contents != null">
+			CONTENTS = #{contents}
+		</if>
+		WHERE NUMBER = #{number}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM BOARD WHERE NUMBER = #{number}
+	</delete>
+
 </mapper>
