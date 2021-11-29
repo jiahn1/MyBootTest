@@ -32,8 +32,8 @@
 	<insert id="boardInsert"
 		parameterType="com.first.demo.domain.Board">
 		INSERT INTO
-		BOARD (NUMBER, SUBJECT,CONTENT,WRITER,CREATED)
-		VALUES(#{number},#{subject},#{contents},#{writer},now())
+		BOARD (NUMBER,SUBJECT,CONTENTS,WRITER,CREATED,PASSWORD)
+		VALUES(#{number},#{subject},#{contents},#{writer},now(),#{password})
 	</insert>
 
 

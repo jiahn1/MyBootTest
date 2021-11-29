@@ -49,9 +49,17 @@ public class BoardController {
     }
     
     @RequestMapping("/insertProc")
-    public int boardInsertProc(HttpServletRequest request) {
-    	Board board = (Board) request.getParameterMap();
-    	return s.boardInsertService(board);
+    public String boardInsertProc(HttpServletRequest request) {
+    	Board board = new Board();
+    	
+    	board.setSubject(request.getParameter("subject"));
+    	board.setContents(request.getParameter("contents"));
+    	board.setWriter(request.getParameter("writer"));
+    	board.setPassword(request.getParameter("password"));
+    	
+    	s.boardInsertService(board);
+    	
+    	return "redirect:/list";
     }
     
     
