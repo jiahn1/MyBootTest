@@ -1,9 +1,7 @@
 package com.first.demo.controller;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,80 +9,95 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.first.demo.domain.Board;
+import java.io.UnsupportedEncodingException;
+
+import com.first.demo.domain.*;
 import com.first.demo.service.BoardService;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
-	private BoardService s;
+    private BoardService s;
 	
-	
-	// 게시판 리스트 호출
     @RequestMapping(value="/list", method=RequestMethod.GET)
     public String boardList(Model model){
-        model.addAttribute("list",s.boardListService());
+    	model.addAttribute("list_Count",s.getBoard_Count());
+        model.addAttribute("list",s.getBoard());     
     	return "list";
+        
     }
     
-    
-    // 게시판 상세보기
-    @RequestMapping("/detail/{number}")
-    public String boardDetail(@PathVariable int number, Model model) {
-    	model.addAttribute("detail", s.boardDetailService(number));
+    @RequestMapping(value="/list_detail", method=RequestMethod.GET)
+    public String list_detail(HttpServletRequest request , Model model) throws UnsupportedEncodingException {
+    	request.setCharacterEncoding("UTF-8");
+
+    	Board_Detail_Value list_value = new Board_Detail_Value(); 
     	
-    	return "detail";
+    	list_value.setNumber(Integer.parseInt(request.getParameter("number")));
+    	    	
+    	model.addAttribute("list_detail",s.getBoard_Detail(list_value));
+    	
+    	return "list_detail";
+    }
+	
+    @RequestMapping(value="/list_add", method=RequestMethod.GET)
+    public String boardList_add(Model model){
+    	return "list_add";
     }
     
+    @RequestMapping(value="/insert", method=RequestMethod.POST)
+    public String insert(HttpServletRequest request) throws UnsupportedEncodingException {
+    	request.setCharacterEncoding("UTF-8");
+
+    	Board_Add list_Add = new Board_Add();
+    	
+    	list_Add.setWriter(request.getParameter("writer"));
+    	list_Add.setSubject(request.getParameter("subject"));
+    	list_Add.setContents(request.getParameter("contents"));
+    	list_Add.setPassword(request.getParameter("pass"));
+    	
+    	s.insertBoard(list_Add);
     
-    // 작성폼 
-    @RequestMapping("/insert")
-    public String boardInsertForm() {
     	return "insert";
     }
     
-    @RequestMapping("/insertProc")
-    public int boardInsertProc(HttpServletRequest request) {
-    	Board board = (Board) request.getParameterMap();
-    	return s.boardInsertService(board);
-    }
-    
-    
-    //게시판 수정폼
-    @RequestMapping("/update/{number}") 
-    public String boardUpdateForm(@PathVariable int number, Model model) {
-    	model.addAttribute("detail", s.boardDetailService(number));
+    @RequestMapping(value="/update", method=RequestMethod.GET)
+    public String update(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+    	request.setCharacterEncoding("UTF-8");
+
+    	Board_Detail list_Detail = new Board_Detail();
     	
+    	list_Detail.setNumber(Integer.parseInt(request.getParameter("number")));
+    	list_Detail.setWriter(request.getParameter("writer"));
+    	list_Detail.setSubject(request.getParameter("subject"));
+    	list_Detail.setContents(request.getParameter("contents"));
+    	
+    	s.updateBoard(list_Detail);
+    	
+    	model.addAttribute("list_number",Integer.parseInt(request.getParameter("number")));
+    
     	return "update";
     }
     
-    @RequestMapping("/updateProc")
-    public int boardUpdateProc(HttpServletRequest request) {
-    	Board board = (Board) request.getParameterMap();
-    	return s.boardUpdateService(board);
+    @RequestMapping(value="/delete", method=RequestMethod.GET)
+    public String delete(HttpServletRequest request) throws UnsupportedEncodingException {
+    	request.setCharacterEncoding("UTF-8");
+
+    	Board_Detail_Value list_value = new Board_Detail_Value(); 
+    	
+    	list_value.setNumber(Integer.parseInt(request.getParameter("number")));
+    	
+    	s.deleteBord(list_value);
+    
+    	return "delete";
     }
     
-    
-    // 게시판 삭제
-    @RequestMapping("/delete/{number}")
-    public String boardDelete(@PathVariable int number) {
-    	s.boardDeleteService(number);
-    	return "redirect:/list";
-    }
-    
-    
-    
-    /* 테스트용 코드
-     * @PostMapping("/board/writepro")
-    public String boardWritePro(String subject, String contents) {
-    	System.out.println("제목 : " + subject);
-    	System.out.println("내용 : " + contents);
-    	return "";
-    }*/
+	@GetMapping(path = "/hello")
+	public String hello() {
+		return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+	}
 }

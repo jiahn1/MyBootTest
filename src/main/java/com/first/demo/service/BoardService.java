@@ -5,36 +5,44 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.first.demo.domain.Board;
+import com.first.demo.domain.*;
 import com.first.demo.mapper.BoardMapper;
-
 
 @Service
 public class BoardService {
 	
-	
 	@Autowired
 	private BoardMapper m;
 	
-	
-	public List<Board> boardListService() {
-		return m.boardList();
+	public List<Board> getBoard(){
+		
+		return m.getBoard();
+		
 	}
 	
-	public Board boardDetailService(int number) {
-		return m.boardDetail(number);
+	public List<Board_Detail> getBoard_Detail(Board_Detail_Value detail){
+		
+		return m.getBoard_Detail(detail);
+		
 	}
 	
-	public int boardInsertService(Board board)  {
-		return m.boardInsert(board);
+	public List<Board_Count> getBoard_Count(){
+		
+		return m.getBoard_Count();
+		
 	}
 	
-	public int boardUpdateService(Board board){
-		return m.boardUpdate(board);
-	}
-	
-	public int boardDeleteService(int number){
-		return m.boardDelete(number);
+	public void insertBoard(Board_Add add) {
+		
+		m.setBorad_Add(add);
 	}
 
+	public void deleteBord(Board_Detail_Value detail) {
+		m.setBorad_Del(detail);
+	}
+
+	public void updateBoard(Board_Detail list_Detail) {
+		m.setBorad_Upd(list_Detail);
+	}
+	
 }
