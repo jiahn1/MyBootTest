@@ -38,7 +38,6 @@ public class BoardController {
     @RequestMapping("/detail/{number}")
     public String boardDetail(@PathVariable int number, Model model) {
     	model.addAttribute("detail", s.boardDetailService(number));
-    	
     	return "detail";
     }
     

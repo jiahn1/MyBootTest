@@ -10,9 +10,14 @@
 <title>list</title>
 </head>
 <body>
-	<%-- <c:forEach items="${list}" var="board">
-${board.created}, ${board.subject}, 	${board.writer}, 	${board.contents}<br>
-	</c:forEach> --%>
-	${list }			
+	<table border="1">
+		<tr>
+		<td>날짜</td><td>제목</td><td>글쓴이</td><td>내용</td>
+		</tr>
+		<c:forEach items="${list}" var="board">
+			<tr><td>${board.created}</td><td>${board.subject}</td><td>${board.writer}</td><td>${board.contents}</td></tr>
+		</c:forEach>
+	</table>
+	<a href="insert">글작성</a>
 </body>
 </html>
