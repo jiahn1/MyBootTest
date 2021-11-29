@@ -37,4 +37,5 @@ public class BoardService {
 		return m.boardDelete(number);
 	}
 
+		
 }

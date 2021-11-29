@@ -10,9 +10,12 @@
 <title>list</title>
 </head>
 <body>
-	<%-- <c:forEach items="${list}" var="board">
-${board.created}, ${board.subject}, 	${board.writer}, 	${board.contents}<br>
-	</c:forEach> --%>
-	${list }			
+	<c:forEach items="${list}" var="board">
+	
+${board.created}, ${board.subject}, 	${board.writer}, 	${board.contents} <a href="delete?number=${board.number }">삭제</a><br>
+	
+	</c:forEach>
+	<%-- ${list } --%>		
+		
 </body>
 </html>

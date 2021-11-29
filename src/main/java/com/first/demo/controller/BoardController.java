@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.first.demo.domain.Board;
 import com.first.demo.service.BoardService;
@@ -72,8 +73,8 @@ public class BoardController {
     
     
     // 게시판 삭제
-    @RequestMapping("/delete/{number}")
-    public String boardDelete(@PathVariable int number) {
+    @RequestMapping("/delete")
+    public String boardDelete(@RequestParam("number") int number) {
     	s.boardDeleteService(number);
     	return "redirect:/list";
     }
