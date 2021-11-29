@@ -54,7 +54,7 @@ public class Board {
 		this.password = password;
 	}
 	
-	
+	/*
 	public Board(int number, String writer, String subject, String contents, Date created, String password) {
         super();
         this.number = number;
@@ -65,5 +65,6 @@ public class Board {
         this.password = password;
         
     }
+    */
     
 }
