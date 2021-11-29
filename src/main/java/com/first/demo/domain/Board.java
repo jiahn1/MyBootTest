@@ -8,7 +8,7 @@ public class Board {
     private String writer;
     private String subject;
     private String contents;
-	private Date datetime;
+	private Date created;
     private String password;
     
 	public int getNumber() {
@@ -35,11 +35,12 @@ public class Board {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getDatetime() {
-		return datetime;
+	
+	public Date getCreated() {
+		return created;
 	}
-	public void setDatetime(Date datetime) {
-		this.datetime = datetime;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 	public String getPassword() {
 		return password;

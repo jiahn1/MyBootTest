@@ -11,6 +11,11 @@
         board
     </select>
     
-    
+    <select id="getDetail" parameterType="int" resultType="com.first.demo.domain.Board">
+        SELECT
+        *
+        FROM
+        board where number = #{number}
+    </select>
     
 </mapper>
