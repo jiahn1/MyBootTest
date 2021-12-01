@@ -1,22 +1,21 @@
 package com.first.demo.domain;
 
-import java.util.Date;
-
-import lombok.Getter;
-import lombok.Setter;
-
-
-@Getter
-@Setter
 public class Board {
 	
+	private int LEVEL_COUNT;
 	private int number;
     private String writer;
-    private String subject;
+	private String subject;
     private String contents;
-	private Date created;
+	private String created;
     private String password;
     
+    public int getLEVEL_COUNT() {
+		return LEVEL_COUNT;
+	}
+	public void setLEVEL_COUNT(int lEVEL_COUNT) {
+		LEVEL_COUNT = lEVEL_COUNT;
+	}
 	public int getNumber() {
 		return number;
 	}
@@ -41,29 +40,18 @@ public class Board {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getCreated() {
+	public String getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	public Board(int number, String writer, String subject, String contents, Date created, String password) {
-        super();
-        this.number = number;
-        this.writer = writer;
-        this.subject = subject;
-        this.contents = contents;
-        this.created = created;
-        this.password = password;
-        
-    }
-    
+
 }

@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+        
 <mapper namespace="com.first.demo.mapper.BoardMapper">
-	
-	<!-- 게시판 개수 -->
-	<select id="boardCount" resultType="com.first.demo.domain.Board">
-		SELECT
-		COUNT()*
-		FROM
-		board
+
+    <select id="getBoard" parameterType="int" resultType="com.first.demo.domain.Board">
+		SELECT LEVEL_COUNT
+			, number
+			, writer
+			, subject
+			, contents
+			, created
+			, password
+	   FROM (SELECT a.number
+				  , a.writer 
+	    		  , a.subject 
+	    		  , a.contents 
+	    		  , date_format(a.created, '%Y-%m-%d %h:%m') AS created
+	    		  , a.password
+	              , ( @rank := @rank + 1) AS LEVEL_COUNT
+			   FROM board a, ( SELECT @rank := 0 ) AS b
+			  order by a.number) M
+	          WHERE LEVEL_COUNT BETWEEN (#{list_count_int}-1)*10+1 AND #{list_count_int}*10
+    </select>
+    
+    <select id="getBoard_Detail" parameterType="com.first.demo.domain.Board_Detail_Value" resultType="com.first.demo.domain.Board_Detail">
+	    SELECT number
+		    ,  writer 
+		    , subject 
+		    , contents 
+		    , date_format(created, '%Y-%m-%d %h:%m') AS created
+		    , password
+		FROM board
+		WHERE number = #{number}
+    </select>
+    
+	<select id="getBoard_Count" resultType="com.first.demo.domain.Board_Count">
+		<![CDATA[
+			SELECT IF(count(number)/10 <= 1, 1, count(number)/10+1) as board_count
+			FROM board
+		]]>
 	</select>
-
-	<!-- 목록 -->
-	<select id="boardList" resultType="com.first.demo.domain.Board">
-		SELECT * FROM BOARD
-	</select>
-
-	<!-- 상세보기 -->
-	<select id="boardDetail" parameterType="int"
-		resultType="com.first.demo.domain.Board">
-		SELECT
-		*
-		FROM BOARD
-		WHERE
-		NUMBER = #{number}
-	</select>
-
-
-	<!-- 삽입 -->
-	<insert id="boardInsert"
-		parameterType="com.first.demo.domain.Board">
-		INSERT INTO
-		BOARD (NUMBER, SUBJECT,CONTENT,WRITER,CREATED)
-		VALUES(#{number},#{subject},#{contents},#{writer},now())
-	</insert>
-
-
-	<!-- 업데이트 -->
-	<update id="boardUpdate"
-		parameterType="com.first.demo.domain.Board">
-		UPDATE BOARD
-		SET
-		<if test="subject != null">  <!-- 혹시나 -->
-			SUBJECT = #{subject}
-		</if>
-		<if test="subject != null and contents != null"> , </if>
-		<if test="contents != null">
-			CONTENTS = #{contents}
-		</if>
-		WHERE NUMBER = #{number}
+    
+    <insert id="setBorad_Add" parameterType="com.first.demo.domain.Board_Add">
+    	insert into board(writer, subject, contents, created, password ) 
+		value (#{writer}, #{subject}, #{contents}, NOW(), #{password})
+    </insert>
+    
+    <update id="setBorad_Upd" parameterType="com.first.demo.domain.Board_Detail">
+		UPDATE board SET 
+			   writer = #{writer}
+			 , subject = #{subject}
+		     , contents = #{contents}
+		     , created = NOW()
+		WHERE number = #{number}
 	</update>
-
-	<!-- 삭제 -->
-	<delete id="boardDelete" parameterType="int">
-		DELETE FROM BOARD WHERE NUMBER = #{number}
-	</delete>
-
+    
+    <delete id="setBorad_Del" parameterType="com.first.demo.domain.Board_Detail_Value">
+    	DELETE FROM board
+		WHERE number = #{number}
+    </delete>
+    
 </mapper>
