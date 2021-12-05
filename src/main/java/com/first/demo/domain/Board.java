@@ -3,12 +3,12 @@ package com.first.demo.domain;
 public class Board {
 	
 	private int LEVEL_COUNT;
-	private int number;
-    private String writer;
-	private String subject;
-    private String contents;
-	private String created;
-    private String password;
+	private int NUMBER;
+    private String WRITER;
+	private String SUBJECT;
+    private String CONTENTS;
+	private String CREATED;
+    private String CREATED_UP;
     
     public int getLEVEL_COUNT() {
 		return LEVEL_COUNT;
@@ -16,42 +16,40 @@ public class Board {
 	public void setLEVEL_COUNT(int lEVEL_COUNT) {
 		LEVEL_COUNT = lEVEL_COUNT;
 	}
-	public int getNumber() {
-		return number;
+	public int getNUMBER() {
+		return NUMBER;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNUMBER(int nUMBER) {
+		NUMBER = nUMBER;
 	}
-	public String getWriter() {
-		return writer;
+	public String getWRITER() {
+		return WRITER;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setWRITER(String wRITER) {
+		WRITER = wRITER;
 	}
-	public String getSubject() {
-		return subject;
+	public String getSUBJECT() {
+		return SUBJECT;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setSUBJECT(String sUBJECT) {
+		SUBJECT = sUBJECT;
 	}
-	public String getContents() {
-		return contents;
+	public String getCONTENTS() {
+		return CONTENTS;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setCONTENTS(String cONTENTS) {
+		CONTENTS = cONTENTS;
 	}
-	public String getCreated() {
-		return created;
+	public String getCREATED() {
+		return CREATED;
 	}
-	public void setCreated(String created) {
-		this.created = created;
+	public void setCREATED(String cREATED) {
+		CREATED = cREATED;
 	}
-
-	public String getPassword() {
-		return password;
+	public String getCREATED_UP() {
+		return CREATED_UP;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCREATED_UP(String cREATED_UP) {
+		CREATED_UP = cREATED_UP;
 	}
-
 }

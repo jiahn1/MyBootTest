@@ -5,60 +5,113 @@
 <mapper namespace="com.first.demo.mapper.BoardMapper">
 
     <select id="getBoard" parameterType="int" resultType="com.first.demo.domain.Board">
-		SELECT LEVEL_COUNT
-			, number
-			, writer
-			, subject
-			, contents
-			, created
-			, password
-	   FROM (SELECT a.number
-				  , a.writer 
-	    		  , a.subject 
-	    		  , a.contents 
-	    		  , date_format(a.created, '%Y-%m-%d %h:%m') AS created
-	    		  , a.password
-	              , ( @rank := @rank + 1) AS LEVEL_COUNT
-			   FROM board a, ( SELECT @rank := 0 ) AS b
-			  order by a.number) M
-	          WHERE LEVEL_COUNT BETWEEN (#{list_count_int}-1)*10+1 AND #{list_count_int}*10
+    	<![CDATA[
+		   SELECT LEVEL_COUNT
+				, NUMBER
+				, WRITER
+				, SUBJECT
+				, CONTENTS
+				, CREATED
+		   FROM (SELECT a.NUMBER
+					  , a.WRITER 
+		    		  , a.SUBJECT 
+		    		  , a.CONTENTS 
+		    		  , date_format(IFNULL(a.CREATED_UP, a.CREATED), '%Y-%m-%d %h:%m') AS CREATED
+		              , ( @rank := @rank + 1) AS LEVEL_COUNT
+				   FROM BOARD a, ( SELECT @rank := 0 ) AS b
+				  ORDER BY IFNULL(a.CREATED_UP, a.CREATED) desc) M
+		  WHERE LEVEL_COUNT BETWEEN (#{LIST_COUNT_INT}-1)*10+1 AND #{LIST_COUNT_INT}*10
+	          ]]>
     </select>
     
     <select id="getBoard_Detail" parameterType="com.first.demo.domain.Board_Detail_Value" resultType="com.first.demo.domain.Board_Detail">
-	    SELECT number
-		    ,  writer 
-		    , subject 
-		    , contents 
-		    , date_format(created, '%Y-%m-%d %h:%m') AS created
-		    , password
-		FROM board
-		WHERE number = #{number}
+	    SELECT NUMBER
+		     , WRITER
+		     , ID 
+		     , SUBJECT 
+		     , CONTENTS 
+		     , date_format(IFNULL(CREATED_UP, CREATED), '%Y-%m-%d %h:%m') AS CREATED
+		  FROM BOARD
+		 WHERE NUMBER = #{NUMBER}
     </select>
+    
+	<select id="getLogin_Find_Code" resultType="com.first.demo.domain.Login_Find_Code">
+		SELECT FIND_CODE
+			 , FIND_CODE_NM
+		  FROM PASS_FIND
+    </select>
+    
+    <select id="getUser_Info" parameterType="String" resultType="com.first.demo.domain.User_Info">
+		SELECT ID
+			 , PASSWORD
+	         , WRITER
+	         , FIND_CODE
+	         , FIND_NM
+	         , date_format(CREATED, '%Y-%m-%d %h:%m') AS CREATED
+		  FROM USER_INFO
+		 WHERE ID = #{ID}
+    </select>
+    
+    <select id="getVail_Chk" parameterType="String" resultType="String">
+	    SELECT COUNT(ID) AS COUNT
+		  FROM USER_INFO
+		 WHERE ID = #{ID}
+    </select>
+    
+	<select id="getLogin_Chk" parameterType="String" resultType="String">
+		SELECT COUNT(ID) AS COUNT
+		  FROM USER_INFO
+		 WHERE ID = #{ID}
+		   AND PASSWORD = #{PASS}
+	</select>
     
 	<select id="getBoard_Count" resultType="com.first.demo.domain.Board_Count">
 		<![CDATA[
-			SELECT IF(count(number)/10 <= 1, 1, count(number)/10+1) as board_count
-			FROM board
+			SELECT IF(count(NUMBER)/10 <= 1, 1, count(NUMBER)/10+1) as BOARD_COUNT
+			FROM BOARD
 		]]>
 	</select>
+	
+	<insert id="setLogin_Add" parameterType="com.first.demo.domain.Login_Add">
+    	INSERT INTO USER_INFO (ID, PASSWORD, WRITER, FIND_CODE, FIND_NM, CREATED)
+		VALUE (#{ID}, #{PASSWORD}, #{WRITER}, #{FIND_CODE}, #{FIND_NM}, NOW())
+	</insert>
     
     <insert id="setBorad_Add" parameterType="com.first.demo.domain.Board_Add">
-    	insert into board(writer, subject, contents, created, password ) 
-		value (#{writer}, #{subject}, #{contents}, NOW(), #{password})
+    	INSERT INTO BOARD(WRITER, ID, SUBJECT, CONTENTS, CREATED) 
+		VALUE (#{WRITER}, #{ID}, #{SUBJECT}, #{CONTENTS}, NOW())
     </insert>
     
-    <update id="setBorad_Upd" parameterType="com.first.demo.domain.Board_Detail">
-		UPDATE board SET 
-			   writer = #{writer}
-			 , subject = #{subject}
-		     , contents = #{contents}
-		     , created = NOW()
-		WHERE number = #{number}
+    <update id="setUser_Upd" parameterType="com.first.demo.domain.User_Detail">
+		UPDATE USER_INFO SET 
+			   WRITER = #{WRITER}
+			 , FIND_CODE = #{FIND_CODE}
+		     , FIND_NM = #{FIND_NM}
+		 WHERE ID = #{ID}
 	</update>
     
+    <update id="setBorad_Upd" parameterType="com.first.demo.domain.Board_Detail">
+		UPDATE BOARD SET 
+			   WRITER = #{WRITER}
+			 , SUBJECT = #{SUBJECT}
+		     , CONTENTS = #{CONTENTS}
+		     , CREATED_UP = NOW()
+		 WHERE NUMBER = #{NUMBER}
+	</update>
+	
+	<delete id="setUser_Del" parameterType="String">
+    	DELETE FROM USER_INFO
+		WHERE ID = #{ID}
+    </delete>
+    
+	<delete id="setUser_Borad_Del" parameterType="String">
+    	DELETE FROM BOARD
+		WHERE ID = #{ID}
+    </delete>
+    
     <delete id="setBorad_Del" parameterType="com.first.demo.domain.Board_Detail_Value">
-    	DELETE FROM board
-		WHERE number = #{number}
+    	DELETE FROM BOARD
+		WHERE NUMBER = #{NUMBER}
     </delete>
     
 </mapper>
