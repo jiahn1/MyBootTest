@@ -2,34 +2,37 @@ package com.first.demo.domain;
 
 public class Board_Add {
 	
-    private String writer;
-    private String subject;
-    private String contents;
-    private String password;
+    private String WRITER;
+    private String ID;
+    private String SUBJECT;
+    private String CONTENTS;
     
-	public String getWriter() {
-		return writer;
+	public String getWRITER() {
+		return WRITER;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setWRITER(String wRITER) {
+		WRITER = wRITER;
 	}
-	public String getSubject() {
-		return subject;
+	
+	public String getID() {
+		return ID;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setID(String iD) {
+		ID = iD;
 	}
-	public String getContents() {
-		return contents;
+	public String getSUBJECT() {
+		return SUBJECT;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setSUBJECT(String sUBJECT) {
+		SUBJECT = sUBJECT;
 	}
-	public String getPassword() {
-		return password;
+	public String getCONTENTS() {
+		return CONTENTS;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCONTENTS(String cONTENTS) {
+		CONTENTS = cONTENTS;
 	}
+    
+
 
 }

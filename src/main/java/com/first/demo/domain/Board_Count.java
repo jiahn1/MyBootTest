@@ -2,14 +2,13 @@ package com.first.demo.domain;
 
 public class Board_Count {
 	
-	private int board_count;
+	private int BOARD_COUNT;
 
-	public int getBoard_count() {
-		return board_count;
+	public int getBOARD_COUNT() {
+		return BOARD_COUNT;
 	}
 
-	public void setBoard_count(int board_count) {
-		this.board_count = board_count;
+	public void setBOARD_COUNT(int bOARD_COUNT) {
+		BOARD_COUNT = bOARD_COUNT;
 	}
-
 }

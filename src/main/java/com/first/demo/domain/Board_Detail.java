@@ -1,50 +1,58 @@
 package com.first.demo.domain;
 
 public class Board_Detail {
-	
-	private int number;
-    private String writer;
-    private String subject;
-    private String contents;
-	private String created;
-    private String password;
+  
+	private int NUMBER;
+    private String WRITER;
+    private String ID;
+	private String SUBJECT;
+    private String CONTENTS;
+	private String CREATED;
+    private String CREATED_UP;
     
-	public int getNumber() {
-		return number;
+	public int getNUMBER() {
+		return NUMBER;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNUMBER(int nUMBER) {
+		NUMBER = nUMBER;
 	}
-	public String getWriter() {
-		return writer;
+	public String getWRITER() {
+		return WRITER;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setWRITER(String wRITER) {
+		WRITER = wRITER;
 	}
-	public String getSubject() {
-		return subject;
+	public String getID() {
+		return ID;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setID(String iD) {
+		ID = iD;
 	}
-	public String getContents() {
-		return contents;
+	public String getSUBJECT() {
+		return SUBJECT;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setSUBJECT(String sUBJECT) {
+		SUBJECT = sUBJECT;
 	}
-	public String getCreated() {
-		return created;
+	public String getCONTENTS() {
+		return CONTENTS;
 	}
-	public void setCreated(String created) {
-		this.created = created;
+	public void setCONTENTS(String cONTENTS) {
+		CONTENTS = cONTENTS;
 	}
+	public String getCREATED() {
+		return CREATED;
+	}
+	public void setCREATED(String cREATED) {
+		CREATED = cREATED;
+	}
+	public String getCREATED_UP() {
+		return CREATED_UP;
+	}
+	public void setCREATED_UP(String cREATED_UP) {
+		CREATED_UP = cREATED_UP;
+	}
+    
 
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 }

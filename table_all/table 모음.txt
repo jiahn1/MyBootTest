@@ -1,0 +1,41 @@
+테이블모음 
+
+게시판 목록/ 상세
+ - number auto / pk 번호    
+ - writer not null  작성자
+ - subject not null 내용       
+ - contents null  내용
+ - created date 작성시간
+ - password 비밀번호
+
+게시판 목록/ 상세 (신규)
+ - number auto / pk 번호 
+ - writer not null  닉네임 
+ - subject not null 주제       
+ - contents 내용         
+ - created not null date 작성시간     
+ - created_up date 수정시간   
+ - id not null 사용자아이디
+
+사용자 정보
+ - id not null pk 사용자 아이디
+ - password not null 비밀번호
+ - writer not null 닉네임
+ - find_code not null 질문코드
+ - find_nm not null 질문 답변
+ - create date not null 가입날짜
+
+비밀번호 찾기 질문
+ - find_code pk not null 질문코드  
+ - find_code_nm not null 질문내용
+
+댓글 정보
+ - Id not null pk 사용자 아이디
+ - writer 닉네임
+ - number not null pk 글번호 
+ - number_sub not null auto pk 관련글 번호
+ - number_sub_no 관련글 번호 댓글 넘버
+ - comment 댓글내용
+ - created not null 작성시간
+ - create_up 수정시간
+
