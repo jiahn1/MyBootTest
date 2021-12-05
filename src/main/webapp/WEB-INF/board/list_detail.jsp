@@ -83,7 +83,7 @@
 					
 					<div class="form-group">
 						<label style="font-size: calc(1.375rem + 0.5vw); font-weight: bold; line-height: 1.8;" for="writer">작성자</label>
-						<input id="writer" type="text" maxlength="200" name="writer" class="form-control" 
+						<input id="writer" type="text" maxlength="32" name="writer" class="form-control" 
 					    	value = "${board.WRITER}" readonly>
 					</div>
 					<br/><br/><br/>

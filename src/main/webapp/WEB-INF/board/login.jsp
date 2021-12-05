@@ -138,10 +138,10 @@
 			<div class ="loginForm">
 				<h2>Login</h2>
 				<div class="idForm">		
-					<input class="id"  id = "id" name = "id" type="text" placeholder="아이디" required>
+					<input class="id"  id = "id" name = "id" type="text" placeholder="아이디" maxlength="50" required>
 				</div>
 				<div class="passForm">
-					<input class="pw" id="pass" name = "pass" type="password"  placeholder="비밀번호" required>
+					<input class="pw" id="pass" name = "pass" type="password"  placeholder="비밀번호" maxlength="50" required>
 				</div>
 				<div>
 					<button class="btn" onclick="button_cick('login');">로그인</button>

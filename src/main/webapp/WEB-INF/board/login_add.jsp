@@ -37,21 +37,21 @@
 				<div class="form-group">
 					<label style="font-size: calc(1.375rem + 0.5vw); font-weight: bold; line-height: 1.8;" for="subject">아이디</label> 
 					<button type="button" class="btn btn-outline-dark" style = "float:right;" id = "validation" value = "중복확인" onclick = "button_cick('validation');">중복확인</button>
-					<input id="id" type="text" maxlength="200" name="id" class="form-control" 
+					<input id="id" type="text" maxlength="50" name="id" class="form-control" 
 				    	placeholder="아이디를 입력해주세요." required>
 				</div>
 				<br>
 				
 				<div class="form-group">
 					<label style="font-size: calc(1.375rem + 0.5vw); font-weight: bold; line-height: 1.8;" for="contents">비밀번호</label>
-					<input id="pass" type="text" class="form-control" name="pass" 
+					<input id="pass" type="text" class="form-control" name="pass" maxlength="50"
 					placeholder="비밀번호를 입력해주세요" ></input>
 				</div>
 				<br>
 				
 				<div class="form-group">
 					<label style="font-size: calc(1.375rem + 0.5vw); font-weight: bold; line-height: 1.8;" for="writer">별명</label>
-					<input id="writer" type="text" maxlength="200" name="writer" class="form-control" 
+					<input id="writer" type="text" maxlength="32" name="writer" class="form-control" 
 				    	placeholder="닉네임을 입력해주세요." required>
 				</div>
 				<br>
