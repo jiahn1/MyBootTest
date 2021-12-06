@@ -2,6 +2,7 @@ package com.first.demo.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,19 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.UnsupportedEncodingException;
 
 import com.first.demo.domain.*;
 import com.first.demo.service.BoardService;
+import com.first.demo.service.CommentService;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
     private BoardService s;
+	
+	@Autowired
+	private CommentService c;
 	
     @RequestMapping(value="/list", method=RequestMethod.GET)
     public String boardList(HttpServletRequest request, Model model) throws UnsupportedEncodingException{
@@ -51,6 +58,7 @@ public class BoardController {
     	
     	list_value.setNumber(Integer.parseInt(request.getParameter("number")));
     	    	
+    	model.addAttribute("list_number",request.getParameter("number"));
     	model.addAttribute("list_detail",s.getBoard_Detail(list_value));
     	
     	return "list_detail";
@@ -108,8 +116,43 @@ public class BoardController {
     	return "delete";
     }
     
+    
+    
+    @RequestMapping(value="/c_list", method=RequestMethod.GET) //댓글 리스트
+    private String mCommentServiceList(HttpServletRequest request, Model model) throws Exception{
+        
+    	model.addAttribute("list_number",request.getParameter("b_idx"));
+    	model.addAttribute("comment_List",c.commentList(request.getParameter("b_idx")));
+    	
+        return "c_list";
+    }
+    
+    
+    @RequestMapping(value="/c_insert", method=RequestMethod.POST)
+    public String c_insert(HttpServletRequest request, Model model) throws Exception {
+    	request.setCharacterEncoding("UTF-8");
+
+    	Board_Comment comment_Add = new Board_Comment();
+    	
+    	comment_Add.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
+    	comment_Add.setWriter(request.getParameter("c_writer"));
+    	comment_Add.setContents(request.getParameter("c_contents"));
+    	comment_Add.setPassword(request.getParameter("c_pass"));
+    	
+    	c.commentInsert(comment_Add);
+    	
+    	model.addAttribute("b_idx", request.getParameter("b_idx"));
+    
+    	return "c_insert";
+    }
+    
+    
+    
+    
 	@GetMapping(path = "/hello")
 	public String hello() {
 		return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	}
+	
+	
 }
